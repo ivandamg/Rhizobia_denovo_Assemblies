@@ -12,7 +12,7 @@ A. Clean reads with fastp
 
 B. denovo assemblies with SPAdes
 
-    sbatch --partition=pibu_el8 --job-name=H1_spaDES --time=48:00:00 --mem-per-cpu=64G --ntasks=8 --cpus-per-task=1 --output=H1_spades.out --error=H1_spades.error --mail-type=END,FAIL --wrap "cd /data/projects/p495_SinorhizobiumMeliloti/07_Axelle/03_denovoNifh_v2/02_TrimmedData; /home/imateusgonzalez/00_Software/SPAdes-3.15.5-Linux/bin/spades.py -k 21,33,55,77 --careful --pe1-1 -1 H1_L1_1_trimmed.fastq.gz --pe1-2 -1 H1_L1_2_trimmed.fastq.gz --pe1-1 -2 H1_L2_1_trimmed.fastq.gz --pe1-2 -2 H1_L2_2_trimmed.fastq.gz -o H1_spades" 
+    sbatch --partition=pibu_el8 --job-name=H1_spaDES --time=48:00:00 --mem-per-cpu=64G --ntasks=8 --cpus-per-task=1 --output=H1_spades.out --error=H1_spades.error --mail-type=END,FAIL --wrap "cd /data/projects/p495_SinorhizobiumMeliloti/07_Axelle/03_denovoNifh_v2/02_TrimmedData; /home/imateusgonzalez/00_Software/SPAdes-3.15.5-Linux/bin/spades.py -k 21,33,55,77 --careful --pe1-1 H1_L1_1_trimmed.fastq.gz --pe1-2 H1_L1_2_trimmed.fastq.gz --pe1-1 H1_L2_1_trimmed.fastq.gz --pe1-2 H1_L2_2_trimmed.fastq.gz -o H1_spades" 
 
 
 C. Annotation with prokka
