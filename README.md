@@ -27,3 +27,5 @@ D. BUSCO
 
 
 E. QUAST
+
+            ./quast.py test_data/contigs_1.fasta test_data/contigs_2.fasta -r test_data/reference.fasta.gz -g test_data/genes.gff
