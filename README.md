@@ -22,3 +22,8 @@ B2. Continue denovo assemblies with SPAdes if stopped before
 C. Annotation with prokka
 
                  prokka --outdir Prokka_annotation_p_ctg_oric --genus Sinorhizobium --species meliloti --strain 2011 --locustag SmelilotiFR --prefix FribourgSMeliloti_Prokka --rfam --usegenus p_ctg_oric.fasta
+
+D. BUSCO
+
+
+E. QUAST
