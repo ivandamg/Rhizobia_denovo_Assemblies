@@ -12,7 +12,7 @@ A. Clean reads with fastp
 
 B. denovo assemblies with SPAdes
 
-    for FILE in $(ls *_1_trimmed.fastq.gz); do echo $FILE; sbatch --partition=pibu_el8 --job-name=$(echo $FILE | cut -d'_' -f1)_spaDES --time=7-48:00:00 --mem-per-cpu=128G --ntasks=8 --cpus-per-task=1 --output=$(echo $FILE | cut -d'_' -f1)_spaDES.out --error=$(echo $FILE | cut -d'_' -f1)_spaDES.error --mail-type=END,FAIL --wrap "module load SPAdes/3.15.3-GCC-10.3.0; cd /data/projects/p774_MARSD/IVAN/02_MAR_DATA/01_Delf/01_raw/02_TrimmedData; spades.py -k 21,33,55,77 --careful --pe1-1 $FILE --pe1-2 $(echo $FILE | cut -d'_' -f1)_2_trimmed.fastq.gz -o ../03_$(echo $FILE | cut -d'_' -f1)_spaDES" ; done 
+    for FILE in $(ls *_1_trimmed.fastq.gz); do echo $FILE; sbatch --partition=pibu_el8 --job-name=$(echo $FILE | cut -d'_' -f1)_spaDES --time=7-48:00:00 --mem-per-cpu=128G --ntasks=8 --cpus-per-task=1 --output=$(echo $FILE | cut -d'_' -f1)_spaDES.out --error=$(echo $FILE | cut -d'_' -f1)_spaDES.error --mail-type=END,FAIL --wrap "module load SPAdes/3.15.3-GCC-10.3.0; cd /data/projects/p774_MARSD/IVAN/02_MAR_DATA/01_Delf/01_raw/02_TrimmedData; spades.py -k 21,33,55,77 --careful --isolate --pe1-1 $FILE --pe1-2 $(echo $FILE | cut -d'_' -f1)_2_trimmed.fastq.gz -o ../03_$(echo $FILE | cut -d'_' -f1)_spaDES" ; done 
 
 B2. Continue denovo assemblies with SPAdes if stopped before
 
