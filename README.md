@@ -19,13 +19,20 @@ B2. Continue denovo assemblies with SPAdes if stopped before
     sbatch --partition=pibu_el8 --job-name=H1_spaDES --time=72:00:00 --mem-per-cpu=64G --ntasks=8 --cpus-per-task=1 --output=H1_spades.out --error=H1_spades.error --mail-type=END,FAIL --wrap "cd /data/projects/p495_SinorhizobiumMeliloti/07_Axelle/03_denovoNifh_v2/02_TrimmedData; /home/imateusgonzalez/00_Software/SPAdes-3.15.5-Linux/bin/spades.py --continue -o H1_spades" 
 
 
+B3. Reduce nb. of contigs, depending on lenght and coverage. with fastagrep.pl script by Tim Booth - tbooth@ceh.ac.uk, http://nebc.nerc.ac.uk
+
+
+            for file in scaffolds.fasta; do grep -F “>” $file | sed -e ‘s/_/ /g’ |sort -nrk 6 |awk ‘$6>=2.0 && $4>=1000 {print $0}’| sed -e ‘s/ /_/g’|sed -e ‘s/>//g’>$file.txt; echo sequences to keep; wc -l $file.txt ;echo running fastagrep.pl; /data/projects/p774_MARSD/IVAN/02_MAR_DATA/ZZ_tools/fastagrep.pl -f $file.txt $file > 01_filteredScaffolds/HCov.$file; echo sequences kept ;grep -c “>” 01_filteredScaffolds/HCov.$file; done
+
 C. Annotation with prokka
 
-                 prokka --outdir Prokka_annotation_p_ctg_oric --genus Sinorhizobium --species meliloti --strain 2011 --locustag SmelilotiFR --prefix FribourgSMeliloti_Prokka --rfam --usegenus p_ctg_oric.fasta
+                  
+
+sbatch --partition=pibu_el8 --job-name=H1_spaDES --time=12:00:00 --mem-per-cpu=64G --ntasks=8 --cpus-per-task=1 --output=H1_spades.out --error=H1_spades.error --mail-type=END,FAIL --wrap "module load prokka/1.14.5-gompi-2021a; cd /data/projects/p774_MARSD/IVAN/02_MAR_DATA/01_Delf/01_raw/03_B06_spaDES; prokka --outdir 02_Prokka --genus bla --species bla --strain bla --locustag bla --prefix B06 --rfam --usegenus /data/users/student<Your Student Number>/01_Prokka/<Your MAG fasta file> --force --cpus 4"
 
 D. BUSCO
 
 
 E. QUAST
 
-            ./quast.py test_data/contigs_1.fasta test_data/contigs_2.fasta -r test_data/reference.fasta.gz -g test_data/genes.gff
+            sbatch --partition=pshort_el8 --job-name=H1_spaDES --time=01:00:00 --mem-per-cpu=64G --ntasks=8 --cpus-per-task=1 --output=B06_quast.out --error=B06_quast.error --mail-type=END,FAIL --wrap "cd /data/projects/p774_MARSD/IVAN/02_MAR_DATA/01_Delf/01_raw/03_B06_spaDES; module load QUAST/5.0.2-foss-2021a; quast scaffolds.fasta  -o Quast"
