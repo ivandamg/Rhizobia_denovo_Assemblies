@@ -28,7 +28,7 @@ C. Annotation with prokka
 
                   
 
-sbatch --partition=pibu_el8 --job-name=H1_spaDES --time=12:00:00 --mem-per-cpu=64G --ntasks=8 --cpus-per-task=1 --output=H1_spades.out --error=H1_spades.error --mail-type=END,FAIL --wrap "module load prokka/1.14.5-gompi-2021a; cd /data/projects/p774_MARSD/IVAN/02_MAR_DATA/01_Delf/01_raw/03_B06_spaDES; prokka --outdir 02_Prokka --genus bla --species bla --strain bla --locustag bla --prefix B06 --rfam --usegenus /data/users/student<Your Student Number>/01_Prokka/<Your MAG fasta file> --force --cpus 4"
+                                    sbatch --partition=pibu_el8 --job-name=H1_spaDES --time=12:00:00 --mem-per-cpu=64G --ntasks=12 --cpus-per-task=1 --output=H1_spades.out --error=H1_spades.error --mail-type=END,FAIL --wrap "module load prokka/1.14.5-gompi-2021a; cd /data/projects/p774_MARSD/IVAN/02_MAR_DATA/01_Delf/01_raw/03_B06_spaDES; prokka --outdir 02_Prokka --genus bla --species bla --strain bla --locustag bla --prefix B06 --rfam --force --cpus 12 --usegenus /data/projects/p774_MARSD/IVAN/02_MAR_DATA/01_Delf/01_raw/03_B06_spaDES/ "
 
 D. BUSCO
 
