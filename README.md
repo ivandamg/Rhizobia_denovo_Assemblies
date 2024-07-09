@@ -38,6 +38,9 @@ C. Annotation with prokka
 D. BUSCO
 
 
+                        sbatch --partition=pibu_el8 --job-name=B06Busco --time=0-10:00:00 --mem-per-cpu=50G --ntasks=12 --cpus-per-task=1 --output=B06_Busco.out --error=B06_Busco.error --mail-type=END,FAIL --wrap "module load BUSCO; cd /data/projects/p774_MARSD/IVAN/02_MAR_DATA/01_Delf/01_raw/03_B06_spaDES/01_filteredScaffolds/; busco -o ../03_BUSCO -i B06_HCov.scaffolds.fasta -l bacteria_odb10 --cpu 12 -m genome -f"
+
+
 E. QUAST
 
             sbatch --partition=pshort_el8 --job-name=H1_spaDES --time=01:00:00 --mem-per-cpu=64G --ntasks=8 --cpus-per-task=1 --output=B06_quast.out --error=B06_quast.error --mail-type=END,FAIL --wrap "cd /data/projects/p774_MARSD/IVAN/02_MAR_DATA/01_Delf/01_raw/03_B06_spaDES; module load QUAST/5.0.2-foss-2021a; quast scaffolds.fasta  -o Quast"
