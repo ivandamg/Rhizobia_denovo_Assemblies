@@ -24,11 +24,16 @@ B3. Reduce nb. of contigs, depending on lenght and coverage. with fastagrep.pl s
 
             for file in scaffolds.fasta; do grep -F “>” $file | sed -e ‘s/_/ /g’ |sort -nrk 6 |awk ‘$6>=2.0 && $4>=1000 {print $0}’| sed -e ‘s/ /_/g’|sed -e ‘s/>//g’>$file.txt; echo sequences to keep; wc -l $file.txt ;echo running fastagrep.pl; /data/projects/p774_MARSD/IVAN/02_MAR_DATA/ZZ_tools/fastagrep.pl -f $file.txt $file > 01_filteredScaffolds/HCov.$file; echo sequences kept ;grep -c “>” 01_filteredScaffolds/HCov.$file; done
 
+
+B4. Change name to include filename
+
+            mv HCov.scaffolds.fasta B11_HCov.scaffolds.fasta
+            
 C. Annotation with prokka
 
                   
 
-                                    sbatch --partition=pibu_el8 --job-name=H1_spaDES --time=12:00:00 --mem-per-cpu=64G --ntasks=12 --cpus-per-task=1 --output=H1_spades.out --error=H1_spades.error --mail-type=END,FAIL --wrap "module load prokka/1.14.5-gompi-2021a; cd /data/projects/p774_MARSD/IVAN/02_MAR_DATA/01_Delf/01_raw/03_B06_spaDES; prokka --outdir 02_Prokka --genus bla --species bla --strain bla --locustag bla --prefix B06 --rfam --force --cpus 12 --usegenus /data/projects/p774_MARSD/IVAN/02_MAR_DATA/01_Delf/01_raw/03_B06_spaDES/ "
+                                    sbatch --partition=pibu_el8 --job-name=B06PROKKA --time=12:00:00 --mem-per-cpu=64G --ntasks=12 --cpus-per-task=1 --output=B06prokka.out --error=B06_prokka.error --mail-type=END,FAIL --wrap "module load prokka/1.14.5-gompi-2021a; cd /data/projects/p774_MARSD/IVAN/02_MAR_DATA/01_Delf/01_raw/03_B06_spaDES/01_filteredScaffolds/; prokka --outdir ../02_Prokka --genus bla --species bla --strain bla --locustag bla --prefix B06 --rfam --force --cpus 12 --usegenus B06_HCov.scaffolds.fasta"
 
 D. BUSCO
 
